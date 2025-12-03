@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const booksRouter = require('./routes/booksRouters'); //change router
+const athleticsRouter = require('./routes/athleticsRouter'); 
 
 const app = express();
 
@@ -9,6 +9,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/', booksRouter); //change router
+app.use('/', athleticsRouter.getCompetitions); 
 
 module.exports = app;
