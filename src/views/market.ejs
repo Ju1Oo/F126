@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Ogłoszenia</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>Lost & Found</h2>
+
+    <div>
+        <a href="/user/profile">Mój profil</a>
+        <a href="/logout">Wyloguj</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Aktualne zgłoszenia</h1>
+
+    <% if(items.length === 0){ %>
+
+        <div class="card">
+            <p>Brak zgłoszeń</p>
+        </div>
+
+    <% } %>
+
+    <form method="GET" action="/market">
+
+    <select name="status">
+        <option value="" <%= !currentStatus ? 'selected' : '' %>>Wszystkie</option>
+        <option value="lost" <%= currentStatus === 'lost' ? 'selected' : '' %>>Zagubione</option>
+        <option value="found" <%= currentStatus === 'found' ? 'selected' : '' %>>Znalezione</option>
+        <option value="resolved" <%= currentStatus === 'resolved' ? 'selected' : '' %>>Zamknięte</option>
+    </select>
+
+    <button style="margin: 0.5%;">
+        Filtruj
+    </button>
+
+</form>
+
+    <% items.forEach(item => { %>
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3><%= item.name %></h3>
+
+                <% if(item.status === 'lost'){ %>
+                    <span class="badge lost">
+                        Zagubiono
+                    </span>
+                <% } %>
+
+                <% if(item.status === 'found'){ %>
+                    <span class="badge found">
+                        Znaleziono
+                    </span>
+                <% } %>
+
+                <% if(item.status === 'resolved'){ %>
+                   <span class="badge resolved">
+                     Zamknięte
+                    </span>
+                <% } %>
+
+            </div>
+
+            <p>
+                <strong>Lokalizacja:</strong>
+                <%= item.location %>
+            </p>
+
+            <p>
+                <strong>Dodane przez:</strong>
+                <%= item.owner_name %>
+            </p>
+
+            <a
+                class="btn"
+                href="/item/<%= item.id %>">
+                Szczegóły
+            </a>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+</body>
+</html>

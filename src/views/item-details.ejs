@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title><%= item.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+
+    <h2>Lost & Found</h2>
+
+    <div>
+        <a href="/market">Powrót</a>
+        <a href="/logout">Wyloguj</a>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1><%= item.name %></h1>
+
+        <p>
+            <strong>Status:</strong>
+
+            <% if(item.status === 'lost'){ %>
+                Zagubiono
+            <% } %>
+
+            <% if(item.status === 'found'){ %>
+                Znaleziono
+            <% } %>
+
+            <% if(item.status === 'resolved'){ %>
+                Odnalezione
+            <% } %>
+        </p>
+
+        <p>
+            <strong>Lokalizacja:</strong>
+            <%= item.location %>
+        </p>
+
+        <p>
+            <strong>Dodane przez:</strong>
+            <%= item.owner_name %>
+        </p>
+
+        <hr>
+
+        <h3>Opis</h3>
+
+        <p>
+            <%= item.description %>
+        </p>
+        <hr>
+
+    <%
+    if(user.id === item.owner_id){
+    %>
+
+    <a
+        class="btn"
+        href="/item/edit/<%= item.id %>">
+
+        Edytuj
+    </a>
+
+    <form
+        action="/item/delete/<%= item.id %>"
+        method="POST"
+        style="margin-top:10px;">
+
+        <button>
+            Usuń zgłoszenie
+        </button>
+
+    </form>
+
+    <%
+    }
+    %>
+
+        <hr>
+
+        <%
+        if(
+            user.id === item.owner_id &&
+            item.status !== 'resolved'
+        ){
+        %>
+
+        <form
+            action="/item/close/<%= item.id %>"
+            method="POST">
+
+            <button>
+                Oznacz jako odnalezione
+            </button>
+
+        </form>
+
+        <%
+        }
+        %>
+
+    </div>
+
+</div>
+
+</body>
+</html>

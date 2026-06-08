@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Rejestracja</h2>
+
+        <% if(error){ %>
+            <p class="error"><%= error %></p>
+        <% } %>
+
+        <form method="POST" action="/register">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Login"
+                required>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Hasło"
+                required>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Numer telefonu"
+                required>
+            <button>
+                Utwórz konto
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

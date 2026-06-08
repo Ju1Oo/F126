@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja zgłoszenia</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Edytuj zgłoszenie</h1>
+
+        <form
+            method="POST"
+            action="/item/edit/<%= item.id %>">
+
+            <input
+                type="text"
+                name="name"
+                value="<%= item.name %>"
+                required>
+
+            <textarea
+                name="description"
+                required><%= item.description %></textarea>
+
+            <input
+                type="text"
+                name="location"
+                value="<%= item.location %>"
+                required>
+
+            <select name="status">
+
+                <option
+                    value="lost"
+                    <%= item.status === 'lost' ? 'selected' : '' %>>
+                    Zagubiono
+                </option>
+
+                <option
+                    value="found"
+                    <%= item.status === 'found' ? 'selected' : '' %>>
+                    Znaleziono
+                </option>
+
+                <option
+                    value="resolved"
+                    <%= item.status === 'resolved' ? 'selected' : '' %>>
+                    Zamknięte
+                </option>
+
+            </select>
+
+            <button>
+                Zapisz zmiany
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
