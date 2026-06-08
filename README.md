@@ -80,6 +80,7 @@ SESSION_SECRET=super_secret_key
 W katalogu projektu wykonaj:
 
 docker compose up -d
+*pamiętaj o właczeniu dockera
 
 ### 5. Utworzenie tabel
 
